@@ -25,6 +25,7 @@ public class ImageControllerTest {
     @Autowired
     private MongoOperations mongoOperations;
 
+    // Client consuming the Reactive REST Endpoint
     private WebTestClient client;
 
     @Before
