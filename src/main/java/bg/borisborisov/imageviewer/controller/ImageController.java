@@ -48,7 +48,7 @@ public class ImageController {
     }
 
     @GetMapping(value = "/{id}/events", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<ImageEvent> streamImageEvents(@PathVariable String id) {
-        return imageService.findById(id).flatMapMany(imageService::streamImageEvents);
+    public Flux<ImageEvent> events(@PathVariable String id) {
+        return imageService.findById(id).flatMapMany(imageService::events);
     }
 }

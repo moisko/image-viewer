@@ -35,7 +35,7 @@ public class ImageService {
         return imageRepository.deleteAll();
     }
 
-    public Flux<ImageEvent> streamImageEvents(Image image) {
+    public Flux<ImageEvent> events(Image image) {
         Flux<Long> interval = Flux.interval(Duration.ofSeconds(1));
         Flux<ImageEvent> events = Flux.fromStream(
                 Stream.generate(() -> new ImageEvent(image, LocalDate.now()))
