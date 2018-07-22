@@ -59,7 +59,7 @@ public class ImageControllerTest {
     }
 
     @Test
-    public void whenGetImageEvents_thenOkStatusResponse() {
+    public void whenGetImageEvents_thenOkStatusResponse_andResponseBodyNotEmpty() {
         FluxExchangeResult<ImageEvent> result = client.get()
                 .uri("/images/1/events")
                 .exchange()
