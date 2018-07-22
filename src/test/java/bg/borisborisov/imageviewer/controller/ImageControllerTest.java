@@ -2,7 +2,6 @@ package bg.borisborisov.imageviewer.controller;
 
 import bg.borisborisov.imageviewer.model.Image;
 import bg.borisborisov.imageviewer.model.ImageEvent;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,12 +29,9 @@ public class ImageControllerTest {
 
     @Before
     public void setup() {
-        client = WebTestClient.bindToController(imageController).build();
-    }
-
-    @After
-    public void cleanUp() {
         mongoOperations.dropCollection(Image.class);
+
+        client = WebTestClient.bindToController(imageController).build();
     }
 
     @Test
