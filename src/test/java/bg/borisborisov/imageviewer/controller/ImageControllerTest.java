@@ -1,6 +1,7 @@
 package bg.borisborisov.imageviewer.controller;
 
 import bg.borisborisov.imageviewer.model.Image;
+import bg.borisborisov.imageviewer.model.ImageEvent;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.reactive.server.FluxExchangeResult;
 import org.springframework.test.web.reactive.server.WebTestClient;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -55,10 +59,13 @@ public class ImageControllerTest {
 
     @Test
     public void whenGetImageEvents_thenOkStatusResponse() {
-        client.get()
+        FluxExchangeResult<ImageEvent> result = client.get()
                 .uri("/images/1/events")
                 .exchange()
                 .expectStatus()
-                .isOk();
+                .isOk()
+                .returnResult(ImageEvent.class);
+        assertThat(result).isNotNull();
+        assertThat(result.getResponseBody()).isNotNull();
     }
 }
